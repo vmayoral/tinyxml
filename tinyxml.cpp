@@ -112,7 +112,12 @@ void TiXmlBase::EncodeString( const TIXML_STRING& str, TIXML_STRING* outString )
 			char buf[ 32 ];
 			
 			#if defined(TIXML_SNPRINTF)		
-				TIXML_SNPRINTF( buf, sizeof(buf), "&#x%02X;", (unsigned) ( c & 0xff ) );
+				#if defined(TIXML_SNPRINTF_S)
+					TIXML_SNPRINTF( buf, sizeof(buf), _TRUNCATE, "&#x%02X;", (unsigned) ( c & 0xff ) );
+				#else
+					TIXML_SNPRINTF( buf, sizeof(buf), "&#x%02X;", (unsigned) ( c & 0xff ) );
+					buf[sizeof(buf) - 1] = '\0';
+				#endif
 			#else
 				sprintf( buf, "&#x%02X;", (unsigned) ( c & 0xff ) );
 			#endif		
