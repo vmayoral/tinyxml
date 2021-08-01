@@ -61,6 +61,7 @@ distribution.
 #ifdef TIXML_SAFE
 	#if defined(_MSC_VER) && (_MSC_VER >= 1400 )
 		// Microsoft visual studio, version 2005 and higher.
+		#define TIXML_SNPRINTF_S
 		#define TIXML_SNPRINTF _snprintf_s
 		#define TIXML_SSCANF   sscanf_s
 	#elif defined(_MSC_VER) && (_MSC_VER >= 1200 )
